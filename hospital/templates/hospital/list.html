@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals and Departments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #007BFF;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #28A745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hospitals and Departments</h1>
+    <!-- list.html -->
+
+<body>
+    <ul>
+        {% for hospital_instance in hospitals %}
+            <li>
+                <strong><a href="{{ hospital_instance.get_absolute_url }}">{{ hospital_instance.hospital_name }}</a></strong>:
+                <ul>
+                    {% for department_instance in hospital_instance.department.all %}
+                        <li>{{ department_instance.get_dept_name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+
+
+    <h1>Create Hospital</h1>
+    <form method="post" action="{% url 'add-hospital' %}">
+        {% csrf_token %}
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>

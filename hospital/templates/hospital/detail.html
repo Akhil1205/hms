@@ -1,0 +1,19 @@
+<!-- hospital_detail.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <title>{{ instance.hospital_name }} Details</title> -->
+</head>
+<body>
+    <h1><a href="{%url 'update-hospital' id=hospital.id}"></a>{{ instance.hospital_name }} Details</h1>
+    
+    <ul>
+        {% for department_instance in instance.department.all %}
+            <li>{{ department_instance.dept_name }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'hospital-list' %}">Back to Hospital List</a>
+</body>
+</html>
